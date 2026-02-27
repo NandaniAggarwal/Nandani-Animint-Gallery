@@ -1,0 +1,5 @@
+add.POSIXct,viz_owner_repo,video,source,title
+2026-02-27T19:14:23.471346Z,NandaniAggarwal/boot.iid_animation_R,,https://github.com/NandaniAggarwal/animint_R/blob/main/bootid.R,Bootstrapping i.i.d Data Port
+2026-02-27T19:14:23.471346Z,NandaniAggarwal/boot.lowess_animations_R,,https://github.com/NandaniAggarwal/animint_R/blob/main/bootlowess.R,Bootstrapping LOWESS Port
+2026-02-27T19:14:23.471346Z,NandaniAggarwal/sample.simple_R,,https://github.com/NandaniAggarwal/animint_R/blob/main/samplesimple.R,Simple Random Sampling Port
+2026-02-27T19:14:23.471346Z,NandaniAggarwal/sample.strat_R,,https://github.com/NandaniAggarwal/animint_R/blob/main/samplestrat.R,Stratified Sampling Port
