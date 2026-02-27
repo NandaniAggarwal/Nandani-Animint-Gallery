@@ -1,11 +1,12 @@
 ---
 title: "Nandani-Animint-Gallery"
 author: "Nandani Aggarwal"
-date: "`r Sys.Date()`"
+date: "2026-02-28"
 output: html_document
 ---
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE}
+
 suppressPackageStartupMessages({
   library(kableExtra)
   library(rmarkdown)
@@ -14,36 +15,42 @@ suppressPackageStartupMessages({
   library(DT)
 })
 
-if (file.exists('meta.csv')) {
-  dt <- read.csv('meta.csv')
-  no_of_ani <- dim(dt)[1]
-  image_links <- character(no_of_ani)
-
-  for(i in 1:no_of_ani){
-    # We use the raw link to the Capture.PNG file
-    image_links[i] <- paste0("[https://raw.githubusercontent.com/](https://raw.githubusercontent.com/)", dt$viz_owner_repo[i], "/gh-pages/Capture.PNG")
-  }
-
-  Creator <- strsplit(dt$viz_owner_repo, split="/")
-  CreatorName <- sapply(Creator, "[[", 1)
-  viz.title <- sapply(Creator, "[[", 2)
-
-  viz.link <- sprintf("https://%s.github.io/%s", CreatorName, viz.title)
-  Visualization_Link <- paste0("<a href='", viz.link, "'>", viz.title, "</a>")
-  Source_Code <- paste0("<a href='", dt$source, "'>Source Code</a>")
-  
-  full_data <- data.frame(
-    Image = "", 
-    Visualization_Link = Visualization_Link,
-    Source = Source_Code,
-    gh_page_repo = dt$viz_owner_repo
-  )
-
- 
-  kable(full_data, format = "html", escape = FALSE) %>%
-    kable_styling(full_width = TRUE, bootstrap_options = c("striped", "hover")) %>%
-    column_spec(1, image = image_links) 
+dt <- read.csv('meta.csv')
+no_of_ani <- dim(dt)[1]
+image_links <- numeric(no_of_ani)
+for(i in 1:dim(dt)[1]){
+  image_links[i] <- sprintf("%s%s%s","https://raw.githubusercontent.com/",dt$viz_owner_repo[i],"/gh-pages/Capture.png")
 }
+
+Creator <- strsplit(dt$viz_owner_repo,split="/")
+CreatorName <- numeric(length(Creator))
+viz.title <- numeric(length(Creator))
+for(i in 1:length(Creator)){
+  CreatorName[i] <-Creator[[i]][1]
+  viz.title[i] <- Creator[[i]][2]
+}
+
+Visualization_Link <- sprintf("%s%s",viz.title,".viz")
+
+image_df <- data.frame(Image="")
+
+Source <- paste0("<a href=", dt$source, ">", dt$title, "</a>")
+
+viz.link <- sprintf("%s%s%s%s","https://",CreatorName,".github.io/",viz.title)
+
+gh_page_repo_link <- sprintf("%s%s%s","https://github.com/",dt$viz_owner_repo,"/tree/gh-pages")
+gh_page_repo <- paste0("<a href=", gh_page_repo_link, ">", dt$commit.POSIXct, "</a>")
+
+Visualization_Link <- paste0("<a href=", viz.link, ">", Visualization_Link, "</a>")
+
+
+full_data <- cbind(image_df,Visualization_Link , dt,Source,gh_page_repo,CreatorName)
+full_data <- full_data[,c(1,2,8,9)]
+
+#Creating table
+kable(full_data, format = "html",escape=FALSE) %>%
+  kable_styling(full_width = FALSE) %>%
+  column_spec(1, image = image_links)
 ```
 [Download the above table](meta.csv)
 
