@@ -19,7 +19,7 @@ dt <- read.csv('meta.csv')
 no_of_ani <- dim(dt)[1]
 image_links <- numeric(no_of_ani)
 for(i in 1:dim(dt)[1]){
-  image_links[i] <- sprintf("%s%s%s","https://raw.githubusercontent.com/",dt$viz_owner_repo[i],"/gh-pages/Capture.png")
+  image_links[i] <- sprintf("repos/%s.png", dt$viz_owner_repo[i])
 }
 
 Creator <- strsplit(dt$viz_owner_repo,split="/")
