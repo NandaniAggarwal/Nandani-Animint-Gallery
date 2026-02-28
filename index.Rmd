@@ -37,7 +37,7 @@ Source <- paste0("<a href='", dt$source, "'>", dt$title, "</a>")
 
 viz.link <- sprintf("%s%s%s%s","https://",CreatorName,".github.io/",viz.title)
 
-gh_page_repo_link <- sprintf("%s%s%s","[https://github.com/](https://github.com/)",dt$viz_owner_repo,"/tree/gh-pages")
+gh_page_repo_link <- sprintf("%s%s%s","https://github.com/",dt$viz_owner_repo,"/tree/gh-pages")
 
 gh_page_repo <- paste0("<a href='", gh_page_repo_link, "'>", dt$add.POSIXct, "</a>")
 
