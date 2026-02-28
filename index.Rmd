@@ -6,7 +6,6 @@ output: html_document
 ---
 
 ```{r, echo=FALSE}
-
 suppressPackageStartupMessages({
   library(kableExtra)
   library(rmarkdown)
@@ -34,14 +33,15 @@ Visualization_Link <- sprintf("%s%s",viz.title,".viz")
 
 image_df <- data.frame(Image="")
 
-Source <- paste0("<a href=", dt$source, ">", dt$title, "</a>")
+Source <- paste0("<a href='", dt$source, "'>", dt$title, "</a>")
 
 viz.link <- sprintf("%s%s%s%s","https://",CreatorName,".github.io/",viz.title)
 
-gh_page_repo_link <- sprintf("%s%s%s","https://github.com/",dt$viz_owner_repo,"/tree/gh-pages")
-gh_page_repo <- paste0("<a href=", gh_page_repo_link, ">", dt$commit.POSIXct, "</a>")
+gh_page_repo_link <- sprintf("%s%s%s","[https://github.com/](https://github.com/)",dt$viz_owner_repo,"/tree/gh-pages")
 
-Visualization_Link <- paste0("<a href=", viz.link, ">", Visualization_Link, "</a>")
+gh_page_repo <- paste0("<a href='", gh_page_repo_link, "'>", dt$add.POSIXct, "</a>")
+
+Visualization_Link <- paste0("<a href='", viz.link, "'>", Visualization_Link, "</a>")
 
 
 full_data <- cbind(image_df,Visualization_Link , dt,Source,gh_page_repo,CreatorName)
